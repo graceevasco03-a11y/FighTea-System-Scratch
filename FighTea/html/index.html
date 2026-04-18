@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="theme-color" content="#4A2C0E"/>
+<title>FighTea — Milk Tea Shop</title>
+<link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+<!-- ══════════════════════ NAVBAR ══════════════════════ -->
+<nav class="navbar" id="main-navbar">
+  <div class="navbar-inner">
+    <button class="navbar-logo-img" onclick="showView('home')">
+      <img src="/assets/logo.png" alt="FighTea Milk Tea Shop" class="site-logo-img"/>
+    </button>
+    <div class="navbar-links">
+      <button class="navbar-link" onclick="showView('menu')">Menu</button>
+      <button class="navbar-link" onclick="showView('about')">About</button>
+      <div id="nav-auth-area" style="display:flex;align-items:center;gap:10px">
+        <button class="navbar-link" onclick="showView('auth')">Sign In</button>
+        <button class="btn btn-primary btn-sm" onclick="showView('auth')">Get Started</button>
+      </div>
+      <button class="cart-btn" onclick="openCart()">🧋 Cart <span class="cart-count">0</span></button>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="cart-btn" onclick="openCart()" style="display:none" id="mobile-cart-btn">🧋 <span class="cart-count">0</span></button>
+      <button class="hamburger" id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobile-nav">
+  <button class="mobile-nav-link" onclick="showView('home')">🏠 Home</button>
+  <button class="mobile-nav-link" onclick="showView('menu')">🧋 Menu</button>
+  <button class="mobile-nav-link" onclick="showView('about')">ℹ️ About</button>
+  <button class="mobile-nav-link" onclick="openCart()">🛒 Cart (<span class="cart-count">0</span>)</button>
+  <div class="mobile-nav-divider"></div>
+  <div class="mobile-nav-auth" id="mobile-auth-btns">
+    <button class="btn btn-outline btn-full" onclick="showView('auth')">Sign In</button>
+    <button class="btn btn-primary btn-full" onclick="showView('auth')">Get Started</button>
+  </div>
+</div>
+
+<!-- ══════════════════════ HOME ══════════════════════ -->
+<div class="view active" id="view-home">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-tag">🧋 Now Open — Dine-in &amp; Order Online</div>
+        <h1>Crafted sips for<br><em>every kind of day.</em></h1>
+        <p>Freshly made milk tea, boba, and fruit tea — customized exactly how you like it.</p>
+        <div class="hero-actions">
+          <button class="btn btn-blush btn-lg" onclick="showView('menu')">Browse Menu</button>
+          <button class="btn btn-lg" style="color:var(--beige);border:2px solid rgba(240,228,200,.35);background:transparent" onclick="showView('auth')">Order Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>Best Sellers</h2><p>Our most-loved drinks — tried, tested, always worth it.</p><div class="section-divider"></div></div>
+      <div class="menu-grid" id="bestsellers-grid"></div>
+      <div style="text-align:center;margin-top:32px"><button class="btn btn-outline btn-lg" onclick="showView('menu')">See Full Menu →</button></div>
+    </div>
+  </section>
+  <section class="section" style="background:var(--brown-deep);color:var(--beige)">
+    <div class="container">
+      <div class="section-head"><h2 style="color:var(--beige)">Why FighTea?</h2><p style="color:rgba(240,228,200,.55)">Community first, always.</p><div class="section-divider"></div></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:8px">
+        <div style="text-align:center;padding:24px 16px"><div style="font-size:40px;margin-bottom:14px">💰</div><h4 style="font-family:var(--font-display);font-size:18px;color:var(--beige);margin-bottom:8px">Affordable</h4><p style="font-size:13px;color:rgba(240,228,200,.5);line-height:1.6">Everyone can taste the joy — our drinks are priced so no one gets left out.</p></div>
+        <div style="text-align:center;padding:24px 16px"><div style="font-size:40px;margin-bottom:14px">✏️</div><h4 style="font-family:var(--font-display);font-size:18px;color:var(--beige);margin-bottom:8px">Customizable Drink</h4><p style="font-size:13px;color:rgba(240,228,200,.5);line-height:1.6">Choose your size, ice level, and toppings — your drink, your way, every time.</p></div>
+        <div style="text-align:center;padding:24px 16px"><div style="font-size:40px;margin-bottom:14px">🤝</div><h4 style="font-family:var(--font-display);font-size:18px;color:var(--beige);margin-bottom:8px">Friendly</h4><p style="font-size:13px;color:rgba(240,228,200,.5);line-height:1.6">Our staff and owners treat every customer like family — come as you are, leave with a smile.</p></div>
+        <div style="text-align:center;padding:24px 16px"><div style="font-size:40px;margin-bottom:14px">💳</div><h4 style="font-family:var(--font-display);font-size:18px;color:var(--beige);margin-bottom:8px">Mode of Payment</h4><p style="font-size:13px;color:rgba(240,228,200,.5);line-height:1.6">Pay with cash or GCash — whichever is easier for you, we accept it with a smile.</p></div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer"><p>© 2024 <strong>FighTea Milk Tea Shop</strong> · Made with ☕ for the community</p></footer>
+</div>
+
+<!-- ══════════════════════ MENU ══════════════════════ -->
+<div class="view" id="view-menu">
+  <div class="section"><div class="container">
+    <div class="section-head"><h2>Our Menu</h2><p>Sip something beautiful. Customize everything.</p><div class="section-divider"></div></div>
+    <div class="cat-pills" id="menu-cat-pills"></div>
+    <div class="menu-grid" id="menu-items-grid"></div>
+  </div></div>
+  <footer class="footer"><p>© 2024 <strong>FighTea Milk Tea Shop</strong></p></footer>
+</div>
+
+<!-- ══════════════════════ AUTH ══════════════════════ -->
+<div class="view" id="view-auth">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo-container"><img src="/assets/logo.png" alt="FighTea" class="auth-logo-img"/></div>
+      <p class="auth-subtitle">Sign in or create your account to order</p>
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Sign In</button>
+        <button class="auth-tab" data-tab="signup">Create Account</button>
+      </div>
+      <form id="login-form" autocomplete="off">
+        <div class="form-group" style="margin-bottom:14px"><label class="form-label">Email</label><input class="form-input" name="email" type="email" placeholder="you@email.com" required/></div>
+        <div class="form-group" style="margin-bottom:20px"><label class="form-label">Password</label><input class="form-input" name="password" type="password" placeholder="••••••••" required/></div>
+        <button class="btn btn-primary btn-full" type="submit">Sign In →</button>
+      </form>
+      <form id="signup-form" style="display:none" autocomplete="off">
+        <div class="form-group" style="margin-bottom:12px"><label class="form-label">Full Name</label><input class="form-input" name="name" type="text" placeholder="Your full name" required/></div>
+        <div class="form-group" style="margin-bottom:12px"><label class="form-label">Email</label><input class="form-input" name="email" type="email" placeholder="you@email.com" required/></div>
+        <div class="form-group" style="margin-bottom:12px"><label class="form-label">Phone (optional)</label><input class="form-input" name="phone" type="tel" placeholder="09XXXXXXXXX"/></div>
+        <div class="form-group" style="margin-bottom:12px"><label class="form-label">Password</label><input class="form-input" name="password" type="password" placeholder="Min. 8 characters" required/></div>
+        <div class="form-group" style="margin-bottom:20px"><label class="form-label">Confirm Password</label><input class="form-input" name="confirm" type="password" placeholder="Repeat password" required/></div>
+        <button class="btn btn-primary btn-full" type="submit">Create Account →</button>
+      </form>
+      <p style="font-size:12px;color:#BBA882;text-align:center;margin-top:16px;cursor:pointer" onclick="showView('home')">← Back to Home</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ ADMIN ══════════════════════ -->
+<div class="view" id="view-admin">
+  <div class="admin-mobile-backdrop" id="admin-mobile-backdrop" onclick="closeAdminMobileMenu()"></div>
+  <div class="admin-mobile-drawer" id="admin-mobile-drawer">
+    <div class="admin-sidebar-logo" style="display:flex;align-items:center;justify-content:space-between">
+      <img src="/assets/" alt="FighTea" style="height:36px;object-fit:contain;filter:brightness(1.8)"/>
+      <button onclick="closeAdminMobileMenu()" style="background:none;border:none;color:rgba(240,228,200,.6);font-size:20px;cursor:pointer">✕</button>
+    </div>
+    <nav class="admin-nav">
+      <button class="admin-nav-item active" data-tab="queue"     onclick="adminTab('queue');closeAdminMobileMenu()">    <span class="admin-nav-icon">📋</span> Order Queue</button>
+      <button class="admin-nav-item"         data-tab="menu"      onclick="adminTab('menu');closeAdminMobileMenu()">     <span class="admin-nav-icon">🧋</span> Menu Manager</button>
+      <button class="admin-nav-item"         data-tab="promos"    onclick="adminTab('promos');closeAdminMobileMenu()">   <span class="admin-nav-icon">🎉</span> Promos</button>
+      <button class="admin-nav-item"         data-tab="analytics" onclick="adminTab('analytics');closeAdminMobileMenu()"><span class="admin-nav-icon">📊</span> Analytics</button>
+      <button class="admin-nav-item"         data-tab="users"     onclick="adminTab('users');closeAdminMobileMenu()">    <span class="admin-nav-icon">👥</span> Users</button>
+      <button class="admin-nav-item"         data-tab="settings"  onclick="adminTab('settings');closeAdminMobileMenu()"> <span class="admin-nav-icon">⚙️</span> Settings</button>
+    </nav>
+    <div class="admin-sidebar-footer">
+      <button class="admin-nav-item" onclick="showView('home')" style="border-left:none;padding-left:0"><span class="admin-nav-icon">←</span> Back to Shop</button>
+      <button class="admin-nav-item" onclick="logout()" style="border-left:none;padding-left:0;color:#EF9A9A"><span class="admin-nav-icon">🚪</span> Sign Out</button>
+    </div>
+  </div>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-logo-img"><img src="/assets/logo.png" alt="FighTea" style="height:40px;object-fit:contain;filter:brightness(1.8);max-width:160px"/></div>
+      <nav class="admin-nav">
+        <button class="admin-nav-item active" data-tab="queue"     onclick="adminTab('queue')">    <span class="admin-nav-icon">📋</span> Order Queue</button>
+        <button class="admin-nav-item"         data-tab="menu"      onclick="adminTab('menu')">     <span class="admin-nav-icon">🧋</span> Menu Manager</button>
+        <button class="admin-nav-item"         data-tab="promos"    onclick="adminTab('promos')">   <span class="admin-nav-icon">🎉</span> Promos</button>
+        <button class="admin-nav-item"         data-tab="analytics" onclick="adminTab('analytics')"><span class="admin-nav-icon">📊</span> Analytics</button>
+        <button class="admin-nav-item"         data-tab="users"     onclick="adminTab('users')">    <span class="admin-nav-icon">👥</span> Users</button>
+        <button class="admin-nav-item"         data-tab="settings"  onclick="adminTab('settings')"> <span class="admin-nav-icon">⚙️</span> Settings</button>
+      </nav>
+      <div class="admin-sidebar-footer">
+        <button class="admin-nav-item" onclick="showView('home')" style="border-left:none;padding-left:0"><span class="admin-nav-icon">←</span> Back to Shop</button>
+        <button class="admin-nav-item" onclick="logout()" style="border-left:none;padding-left:0;color:#EF9A9A"><span class="admin-nav-icon">🚪</span> Sign Out</button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <div style="display:flex;align-items:center;gap:12px">
+          <button class="admin-menu-toggle" onclick="toggleAdminMobileMenu()">☰ Menu</button>
+          <h2 id="admin-page-title">Order Queue</h2>
+        </div>
+        <div class="admin-topbar-right">
+          <span id="admin-clock" style="font-size:12px;color:var(--brown-light);display:none"></span>
+          <span id="admin-user-label" style="font-size:13px;color:var(--brown);font-weight:500"></span>
+        </div>
+      </div>
+      <div class="admin-content">
+
+        <!-- ORDER QUEUE -->
+        <div class="admin-tab-panel active" id="admin-queue">
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="stat-pending">0</div><div class="stat-sub">awaiting prep</div></div>
+            <div class="stat-card"><div class="stat-label">Preparing</div><div class="stat-value" id="stat-preparing">0</div><div class="stat-sub">in kitchen</div></div>
+            <div class="stat-card"><div class="stat-label">Ready</div><div class="stat-value" id="stat-ready">0</div><div class="stat-sub">for pickup</div></div>
+            <div class="stat-card accent"><div class="stat-label">Revenue (Paid)</div><div class="stat-value" id="stat-revenue">₱0</div><div class="stat-sub">all orders</div></div>
+          </div>
+          <div class="queue-filters">
+            <button class="queue-filter active" data-filter="active"    onclick="renderQueue('active')">Active</button>
+            <button class="queue-filter"        data-filter="pending"   onclick="renderQueue('pending')">Pending</button>
+            <button class="queue-filter"        data-filter="preparing" onclick="renderQueue('preparing')">Preparing</button>
+            <button class="queue-filter"        data-filter="ready"     onclick="renderQueue('ready')">Ready</button>
+            <button class="queue-filter"        data-filter="completed" onclick="renderQueue('completed')">Completed</button>
+            <button class="queue-filter"        data-filter="all"       onclick="renderQueue('all')">All</button>
+          </div>
+          <div class="queue-grid" id="queue-grid">
+            <div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">🧋</div><h4>No active orders yet</h4><p>Orders appear here when customers place them.</p></div>
+          </div>
+        </div>
+
+        <!-- MENU MANAGER -->
+        <div class="admin-tab-panel" id="admin-menu">
+          <!-- Drinks -->
+          <div style="margin-bottom:32px">
+            <div class="filter-bar">
+              <div class="search-wrap"><span class="search-icon">🔍</span><input class="search-input" id="menu-search-input" type="text" placeholder="Search items..." oninput="renderMenuGrid(this.value)"/></div>
+              <button class="btn btn-primary btn-sm" onclick="openAddItem()">+ Add Item</button>
+            </div>
+            <div class="product-admin-grid" id="admin-menu-grid"></div>
+          </div>
+          <!-- Categories -->
+          <div style="margin-bottom:32px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <h4 style="font-family:var(--font-display);font-size:18px">Categories</h4>
+              <button class="btn btn-primary btn-sm" onclick="openAddCategory()">+ Add Category</button>
+            </div>
+            <div class="manage-list" id="admin-categories-list"></div>
+          </div>
+          <!-- Global Sizes -->
+          <div style="margin-bottom:32px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <div>
+                <h4 style="font-family:var(--font-display);font-size:18px">Sizes</h4>
+                <p style="font-size:12px;color:#BBA882;margin-top:2px">Applied to drink items that have sizes enabled.</p>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="openAddGlobalSize()">+ Add Size</button>
+            </div>
+            <div class="manage-list" id="admin-sizes-list"></div>
+          </div>
+          <!-- Toppings -->
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <h4 style="font-family:var(--font-display);font-size:18px">Toppings</h4>
+              <button class="btn btn-primary btn-sm" onclick="openAddTopping()">+ Add Topping</button>
+            </div>
+            <div class="manage-list" id="admin-toppings-list"></div>
+          </div>
+        </div>
+
+        <!-- PROMOS -->
+        <div class="admin-tab-panel" id="admin-promos">
+          <div id="admin-promos-content"></div>
+        </div>
+
+        <!-- ANALYTICS -->
+        <div class="admin-tab-panel" id="admin-analytics"><div id="analytics-content"></div></div>
+
+        <!-- USERS -->
+        <div class="admin-tab-panel" id="admin-users">
+          <div class="filter-bar" style="margin-bottom:20px">
+            <h4 style="font-family:var(--font-display)">Registered Users</h4>
+            <button class="btn btn-primary btn-sm" onclick="openAddUser()">+ Add User</button>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Role</th><th>Actions</th></tr></thead>
+              <tbody id="users-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SETTINGS -->
+        <div class="admin-tab-panel" id="admin-settings">
+          <div style="max-width:520px">
+            <h4 style="font-family:var(--font-display);margin-bottom:20px">Database Configuration</h4>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+              <div class="form-group"><label class="form-label">MySQL Host</label><input class="form-input" type="text" value="localhost"/></div>
+              <div class="form-group"><label class="form-label">Database Name</label><input class="form-input" type="text" value="fightea_db"/></div>
+              <div class="form-group"><label class="form-label">DB Username</label><input class="form-input" type="text" value="root"/></div>
+              <div class="form-group"><label class="form-label">DB Password</label><input class="form-input" type="password" placeholder="••••••••"/></div>
+            </div>
+            <h4 style="font-family:var(--font-display);margin-bottom:16px;margin-top:8px">Shop Settings</h4>
+            <div class="form-group" style="margin-bottom:14px"><label class="form-label">Shop Name</label><input class="form-input" type="text" value="FighTea Milk Tea Shop"/></div>
+            <div class="form-group" style="margin-bottom:24px">
+              <label class="form-label">GCash Number</label>
+              <input class="form-input" id="gcash-shop-number-setting" type="text" value="09171234567" oninput="document.getElementById('gcash-shop-number').textContent=this.value"/>
+            </div>
+            <button class="btn btn-primary" onclick="showToast('Settings saved! Connect backend to persist.','success')">Save Settings</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ══════════════════════ ABOUT ══════════════════════ -->
+<div class="view" id="view-about">
+  <section class="section"><div class="container" style="max-width:720px"><div class="section-head"><h2>About FighTea</h2><div class="section-divider"></div></div><p style="font-size:15px;color:var(--brown-light);line-height:1.8;text-align:center">FighTea is a community milk tea shop built on the belief that every sip should tell a story. Come as you are. Order what you love. That's the FighTea way. 🧋</p></div></section>
+  <footer class="footer"><p>© 2024 <strong>FighTea Milk Tea Shop</strong></p></footer>
+</div>
+
+<!-- ══════════════════════ CART ══════════════════════ -->
+<div class="cart-backdrop" id="cart-backdrop"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-drawer-header"><h3 style="font-family:var(--font-display);font-size:22px">Your Order</h3><button class="modal-close" onclick="closeCart()">✕</button></div>
+  <div class="cart-drawer-body" id="cart-items"></div>
+  <div class="cart-drawer-footer">
+    <div class="cart-total-row"><span class="cart-total-label">Subtotal</span><span class="cart-total-val" id="cart-grand-total">₱0</span></div>
+    <button class="btn btn-teal btn-full btn-lg" onclick="openCheckout()">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════ MODAL: CUSTOMIZE ══════════════════════ -->
+<div class="modal-overlay" id="customize-modal">
+  <div class="modal-box">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:8px"><button class="modal-close" onclick="closeModal('customize-modal')">✕</button></div>
+    <div class="modal-drink-header" id="modal-drink-header"><div class="modal-drink-thumb"></div><div></div></div>
+    <!-- Varieties -->
+    <div class="option-section" id="modal-varieties-section" style="display:none">
+      <div class="option-title">Variety</div>
+      <div class="options-row" id="modal-varieties"></div>
+    </div>
+    <!-- Sizes (only shown for drink items without varieties) -->
+    <div class="option-section" id="modal-sizes-section" style="display:none">
+      <div class="option-title">Size</div>
+      <div class="options-row" id="modal-sizes"></div>
+    </div>
+    <!-- Ice (only for drink items) -->
+    <div class="option-section" id="modal-ice-section" style="display:none">
+      <div class="option-title">Ice Level</div>
+      <div class="options-row" id="modal-ice"></div>
+    </div>
+    <!-- Toppings -->
+    <div class="option-section" id="modal-toppings-section" style="display:none">
+      <div class="option-title">Toppings <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#9A7A5A">(add-on priced)</span></div>
+      <div class="topping-grid" id="modal-toppings"></div>
+    </div>
+    <!-- Promos -->
+    <div class="option-section" id="modal-promos-section" style="display:none">
+      <div class="option-title">🎉 Available Promos</div>
+      <div style="display:flex;flex-direction:column;gap:8px" id="modal-promos"></div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin:16px 0 20px">
+      <div><div style="font-size:11px;color:#BBA882;margin-bottom:6px;text-transform:uppercase;letter-spacing:.7px">Quantity</div>
+        <div class="qty-control"><button class="qty-btn" onclick="changeQty(-1)">−</button><span class="qty-val" id="modal-qty">1</span><button class="qty-btn" onclick="changeQty(1)">+</button></div>
+      </div>
+      <div style="text-align:right"><div style="font-size:11px;color:#BBA882;margin-bottom:4px;text-transform:uppercase;letter-spacing:.7px">Total</div><div class="price-preview" id="modal-total">₱0</div></div>
+    </div>
+    <button class="btn btn-primary btn-full btn-lg" onclick="addToCartFromModal()">Add to Cart 🧋</button>
+  </div>
+</div>
+
+<!-- ══════════════════════ MODAL: CHECKOUT ══════════════════════ -->
+<div class="modal-overlay" id="checkout-modal">
+  <div class="modal-box">
+    <div class="modal-header"><h3>Checkout</h3><button class="modal-close" onclick="closeModal('checkout-modal')">✕</button></div>
+    <div class="option-section">
+      <div class="option-title">Payment Method</div>
+      <div class="payment-methods">
+        <div class="payment-card active" data-method="cash" onclick="selectPaymentMethod('cash')"><div class="payment-icon">💵</div><div class="payment-label">Cash</div><div style="font-size:11px;color:#9A7A5A;margin-top:4px">Pay on pickup</div></div>
+        <div class="payment-card" data-method="gcash" onclick="selectPaymentMethod('gcash')"><div class="payment-icon">💙</div><div class="payment-label">GCash</div><div style="font-size:11px;color:#9A7A5A;margin-top:4px">Direct GCash payment</div></div>
+      </div>
+      <div id="gcash-fields" style="display:none">
+        <div class="gcash-box">
+          <p style="font-size:11px;opacity:.8">Send payment to FighTea GCash:</p>
+          <div class="gcash-number" id="gcash-shop-number">09171234567</div>
+          <p style="margin-top:4px">Tap below to open GCash app directly:</p>
+          <button class="gcash-open-btn" onclick="openGCashApp()">💙 Open GCash App</button>
+        </div>
+        <div id="gcash-manual-section" style="display:none">
+          <div class="form-group"><label class="form-label">GCash Reference Number</label><input class="form-input" id="gcash-ref-input" type="text" placeholder="e.g. GC-123456789"/></div>
+        </div>
+      </div>
+    </div>
+    <div class="option-section"><div class="option-title">Special Instructions</div><textarea class="form-input" id="order-notes" rows="2" placeholder="Extra toppings, less ice, etc..."></textarea></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--beige);padding-top:16px;margin-top:8px">
+      <span style="font-size:16px;font-weight:500">Order Total</span>
+      <span style="font-size:22px;font-weight:700;color:var(--brown)" id="checkout-total">₱0</span>
+    </div>
+    <button class="btn btn-primary btn-full btn-lg" style="margin-top:16px" onclick="placeOrder()">Place Order →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════ MODAL: ORDER CONFIRMED ══════════════════════ -->
+<div class="modal-overlay" id="order-confirm-modal">
+  <div class="modal-box" style="text-align:center">
+    <div style="font-size:64px;margin-bottom:16px">🎉</div>
+    <h2 style="color:var(--teal);margin-bottom:8px">Order Placed!</h2>
+    <p style="color:#9A7A5A;margin-bottom:24px">Your order is received and will be prepared shortly.</p>
+    <div style="background:var(--beige);border-radius:var(--r-md);padding:18px;margin-bottom:24px">
+      <div style="font-size:13px;color:#9A7A5A">Order Number</div>
+      <div style="font-size:24px;font-weight:700;color:var(--brown-deep);font-family:var(--font-display)" id="confirm-order-id"></div>
+      <div style="font-size:20px;font-weight:600;color:var(--brown);margin-top:8px" id="confirm-order-total"></div>
+      <div style="font-size:13px;color:#9A7A5A;margin-top:6px" id="confirm-payment"></div>
+    </div>
+    <button class="btn btn-primary btn-full" onclick="closeModal('order-confirm-modal');showView('menu')">Order More 🧋</button>
+    <button class="btn btn-ghost btn-full" style="margin-top:8px" onclick="closeModal('order-confirm-modal')">Close</button>
+  </div>
+</div>
+
+<!-- ══════════════════════ MODAL: EDIT ORDER ══════════════════════ -->
+<div class="modal-overlay" id="edit-order-modal">
+  <div class="modal-box modal-box-lg">
+    <div class="modal-header"><div><h3>Edit Order</h3><p style="font-size:13px;color:#9A7A5A;margin-top:3px" id="edit-order-id"></p></div><button class="modal-close" onclick="closeModal('edit-order-modal')">✕</button></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+      <div class="form-group"><label class="form-label">Customer Name</label><input class="form-input" id="edit-customer" type="text"/></div>
+      <div class="form-group"><label class="form-label">Payment Method</label><select class="form-select" id="edit-payment"><option value="cash">Cash</option><option value="gcash">GCash</option></select></div>
+    </div>
+    <div id="edit-items-list" style="margin-bottom:16px"></div>
+    <div class="form-group" style="margin-bottom:20px"><label class="form-label">Notes</label><textarea class="form-input" id="edit-notes" rows="2"></textarea></div>
+    <div style="display:flex;gap:10px"><button class="btn btn-primary btn-full" onclick="saveEditOrder()">Save Changes</button><button class="btn btn-outline" onclick="closeModal('edit-order-modal')" style="flex-shrink:0">Cancel</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════ MODAL: ADD/EDIT ITEM ══════════════════════ -->
+<div class="modal-overlay" id="item-modal">
+  <div class="modal-box" style="max-width:560px">
+    <div class="modal-header"><h3 id="item-modal-title">Add Item</h3><button class="modal-close" onclick="closeModal('item-modal')">✕</button></div>
+    <input type="hidden" id="item-form-id"/>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+      <div class="form-group"><label class="form-label">Name *</label><input class="form-input" id="item-form-name" type="text" placeholder="e.g. Brown Sugar Boba"/></div>
+      <div class="form-group"><label class="form-label">Category *</label><select class="form-select" id="item-form-cat"></select></div>
+    </div>
+    <div class="form-group" style="margin-bottom:14px"><label class="form-label">Base Price (₱) *</label><input class="form-input" id="item-form-price" type="number" min="0" placeholder="e.g. 120"/></div>
+    <div class="form-group" style="margin-bottom:14px"><label class="form-label">Description</label><textarea class="form-input" id="item-form-desc" rows="2" placeholder="Short description..."></textarea></div>
+
+    <!-- Varieties -->
+    <div style="margin-bottom:16px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <div>
+          <label class="form-label" style="display:block">Varieties</label>
+          <p style="font-size:11px;color:#BBA882;margin-top:2px">e.g. Regular, Cheesy, Overload. Each variety replaces the base price.</p>
+        </div>
+        <button type="button" class="btn btn-outline btn-sm" onclick="addVariety()">+ Add</button>
+      </div>
+      <div id="varieties-container" style="display:flex;flex-direction:column;gap:8px"></div>
+    </div>
+
+    <!-- Sizes toggle -->
+    <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;background:var(--cream);border-radius:var(--r-sm);padding:12px">
+      <input type="checkbox" id="item-form-has-sizes" style="width:16px;height:16px;cursor:pointer;margin-top:2px"/>
+      <div>
+        <label for="item-form-has-sizes" style="font-size:14px;cursor:pointer;font-weight:500">Enable Sizes</label>
+        <p style="font-size:11px;color:#BBA882;margin-top:2px">Check for drinks (Small/Medium/Large). Leave unchecked for food items.</p>
+      </div>
+    </div>
+
+    <!-- Image -->
+    <div class="form-group" style="margin-bottom:14px">
+      <label class="form-label">Product Image</label>
+      <div class="img-upload-area">
+        <div style="font-size:24px;margin-bottom:6px">📷</div>
+        <p style="font-size:13px;color:var(--brown-light)">Click or drag to upload</p>
+        <p style="font-size:11px;color:#BBA882;margin-top:4px">JPG, PNG, WebP · Max 5MB</p>
+        <input type="file" id="item-form-image-file" accept="image/*"/>
+      </div>
+      <img id="item-form-image-preview" class="img-upload-preview" alt="Preview"/>
+    </div>
+    <div class="form-group" style="margin-bottom:14px"><label class="form-label">Or paste Image URL</label><input class="form-input" id="item-form-image-url" type="url" placeholder="https://example.com/item.jpg"/></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+      <input type="checkbox" id="item-form-bestseller" style="width:16px;height:16px;cursor:pointer"/>
+      <label for="item-form-bestseller" style="font-size:14px;cursor:pointer">Mark as Best Seller</label>
+    </div>
+    <div style="display:flex;gap:10px"><button class="btn btn-primary btn-full" onclick="saveItemForm()">Save Item</button><button class="btn btn-outline" onclick="closeModal('item-modal')" style="flex-shrink:0">Cancel</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════ MODAL: CATEGORY ══════════════════════ -->
+<div class="modal-overlay" id="cat-modal">
+  <div class="modal-box" style="max-width:400px">
+    <div class="modal-header"><h3 id="cat-modal-title">Add Category</h3><button class="modal-close" onclick="closeModal('cat-modal')">✕</button></div>
+    <div class="form-group" style="margin-bottom:20px"><label class="form-label">Category Name *</label><input class="form-input" id="cat-form-name" type="text" placeholder="e.g. Milk Tea"/></div>
+    <div style="display:flex;gap:10px"><button class="btn btn-primary btn-full" onclick="saveCategoryForm()">Save Category</button><button class="btn btn-outline" onclick="closeModal('cat-modal')" style="flex-shrink:0">Cancel</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════ MODAL: GLOBAL SIZE ══════════════════════ -->
+<div class="modal-overlay" id="gsize-modal">
+  <div class="modal-box" style="max-width:420px">
+    <div class="modal-header"><h3 id="gsize-modal-title">Add Size</h3><button class="modal-close" onclick="closeModal('gsize-modal')">✕</button></div>
+    <div class="form-group" style="margin-bottom:14px"><label class="form-label">Size Label *</label><input class="form-input" id="gsize-form-label" type="text" placeholder="e.g. Large (22oz)"/></div>
+    <div class="form-group" style="margin-bottom:20px"><label class="form-label">Price Add-on (₱)</label><input class="form-input" id="gsize-form-priceadd" type="number" min="0" value="0" placeholder="0 = base price"/></div>
+    <div style="display:flex;gap:10px"><button class="btn btn-primary btn-full" onclick="saveGlobalSizeForm()">Save Size</button><button class="btn btn-outline" onclick="closeModal('gsize-modal')" style="flex-shrink:0">Cancel</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════ MODAL: TOPPING ══════════════════════ -->
+<div class="modal-overlay" id="topping-modal">
+  <div class="modal-box" style="max-width:420px">
+    <div class="modal-header"><h3 id="topping-modal-title">Add Topping</h3><button class="modal-close" onclick="closeModal('topping-modal')">✕</button></div>
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:14px">
+      <div class="form-group"><label class="form-label">Topping Name *</label><input class="form-input" id="topping-form-name" type="text" placeholder="e.g. Tapioca Pearls"/></div>
+      <div class="form-group"><label class="form-label">Emoji</label><input class="form-input" id="topping-form-emoji" type="text" placeholder="⚫" maxlength="4"/></div>
+    </div>
+    <div class="form-group" style="margin-bottom:20px"><label class="form-label">Add-on Price (₱) *</label><input class="form-input" id="topping-form-price" type="number" min="0" step="1" value="15"/></div>
+    <div style="display:flex;gap:10px"><button class="btn btn-primary btn-full" onclick="saveToppingForm()">Save Topping</button><button class="btn btn-outline" onclick="closeModal('topping-modal')" style="flex-shrink:0">Cancel</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════ MODAL: PROMO ══════════════════════ -->
+<div class="modal-overlay" id="promo-modal">
+  <div class="modal-box modal-box-lg">
+    <div class="modal-header"><h3 id="promo-modal-title">Add Promo</h3><button class="modal-close" onclick="closeModal('promo-modal')">✕</button></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+      <div class="form-group"><label class="form-label">Promo Name *</label><input class="form-input" id="promo-form-name" type="text" placeholder="e.g. Buy 1 Take 1"/></div>
+      <div class="form-group"><label class="form-label">Badge Label</label><input class="form-input" id="promo-form-badge" type="text" placeholder="e.g. B1T1"/></div>
+    </div>
+    <div class="form-group" style="margin-bottom:14px"><label class="form-label">Description (optional)</label><input class="form-input" id="promo-form-desc" type="text" placeholder="e.g. Valid weekends only"/></div>
+    <div style="margin-bottom:8px"><label class="form-label">Promo Items with Prices</label><p style="font-size:11px;color:#BBA882;margin-top:3px">Set the promo price for each item (optionally filtered by variety or size).</p></div>
+    <div id="promo-items-container" style="margin-bottom:20px"></div>
+    <div style="display:flex;gap:10px"><button class="btn btn-primary btn-full" onclick="savePromoForm()">Save Promo</button><button class="btn btn-outline" onclick="closeModal('promo-modal')" style="flex-shrink:0">Cancel</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════ MODAL: USER ══════════════════════ -->
+<div class="modal-overlay" id="user-modal">
+  <div class="modal-box">
+    <div class="modal-header"><h3 id="user-modal-title">Add User</h3><button class="modal-close" onclick="closeModal('user-modal')">✕</button></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+      <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="user-form-name" type="text" placeholder="Full name"/></div>
+      <div class="form-group"><label class="form-label">Email *</label><input class="form-input" id="user-form-email" type="email" placeholder="email@example.com"/></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+      <div class="form-group"><label class="form-label">Phone</label><input class="form-input" id="user-form-phone" type="tel" placeholder="09XXXXXXXXX"/></div>
+      <div class="form-group"><label class="form-label">Role *</label><select class="form-select" id="user-form-role"><option value="customer">Customer</option><option value="staff">Staff</option><option value="admin">Admin</option></select></div>
+    </div>
+    <div class="form-group" style="margin-bottom:8px"><label class="form-label">Password <span id="pass-hint" style="text-transform:none;font-weight:400;color:#BBA882;display:none">(leave blank to keep current)</span></label><input class="form-input" id="user-form-pass" type="password" placeholder="••••••••"/></div>
+    <div style="background:var(--beige);border-radius:var(--r-sm);padding:12px;margin-bottom:20px;font-size:12px;color:var(--brown-deep)">
+      🔐 <strong>Admin</strong> — Full access · 👷 <strong>Staff</strong> — Queue only · 👤 <strong>Customer</strong> — Order only
+    </div>
+    <div style="display:flex;gap:10px"><button class="btn btn-primary btn-full" onclick="saveUserForm()">Save User</button><button class="btn btn-outline" onclick="closeModal('user-modal')" style="flex-shrink:0">Cancel</button></div>
+  </div>
+</div>
+
+<div class="toast-container" id="toast-container"></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/admin.js"></script>
+<script>
+function updateClock(){ const el=document.getElementById('admin-clock'); if(el)el.textContent=new Date().toLocaleString('en-PH',{hour:'2-digit',minute:'2-digit',second:'2-digit',weekday:'short',month:'short',day:'numeric'}); }
+setInterval(updateClock,1000); updateClock();
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const cl=document.getElementById('admin-clock');
+  const chkClock=()=>{ if(cl)cl.style.display=window.innerWidth>767?'block':'none'; };
+  chkClock(); window.addEventListener('resize',chkClock);
+  const mobileCartBtn=document.getElementById('mobile-cart-btn');
+  if(mobileCartBtn){ const chk=()=>mobileCartBtn.style.display=window.innerWidth<=767?'flex':'none'; chk(); window.addEventListener('resize',chk); }
+  if(typeof initImageUpload==='function') initImageUpload();
+});
+</script>
+</body>
+</html>
